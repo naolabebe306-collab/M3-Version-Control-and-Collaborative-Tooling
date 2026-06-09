@@ -1,0 +1,23 @@
+import { AssessmentItem, calculateGrade } from "./models/assessment.model";
+
+const quiz: AssessmentItem = {
+  id: "QUIZ-001",
+  kind: "quiz",
+  title: "SQL Basics",
+  correctAnswers: 8,
+  totalQuestions: 10,
+};
+
+const lab: AssessmentItem = {
+  id: "LAB-001",
+  kind: "lab",
+  title: "REST API Project",
+  functionalityScore: 85,
+  codeQualityScore: 90,
+};
+
+console.log(`Quiz grade: ${calculateGrade(quiz)}%`);
+console.log(`Lab grade: ${calculateGrade(lab)}%`);
+
+// Uncomment to test readonly error
+// quiz.id = "QUIZ-999";
