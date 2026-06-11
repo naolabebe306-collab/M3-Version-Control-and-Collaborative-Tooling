@@ -13,9 +13,11 @@ public class EnrollmentWorker
     {
         using var scope = _scopeFactory.CreateScope();
 
-        var enrollmentService =
-            scope.ServiceProvider.GetRequiredService<IEnrollmentService>();
+        var service = scope.ServiceProvider.GetRequiredService<IEnrollmentService>();
 
-        Console.WriteLine("Processing enrollments...");
+       
+        var result = service.GetAllAsync().Result;
+
+        Console.WriteLine($"Processed {result.Count} enrollments");
     }
 }
