@@ -1,5 +1,12 @@
 var builder = WebApplication.CreateBuilder(args);
 
+// Validate DI lifetimes
+builder.Host.UseDefaultServiceProvider(options =>
+{
+    options.ValidateScopes = true;
+    options.ValidateOnBuild = true;
+});
+
 // Services
 builder.Services.AddControllers();
 
@@ -9,6 +16,10 @@ builder.Services.AddAuthentication("TestScheme")
         TestAuthenticationHandler>("TestScheme", options => { });
 
 builder.Services.AddAuthorization();
+
+// Exercise 2 registrations
+builder.Services.AddSingleton<EnrollmentWorker>();
+builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
 
 var app = builder.Build();
 
